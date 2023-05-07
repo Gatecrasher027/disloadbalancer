@@ -61,7 +61,9 @@ To test the network:
 We run the following commands to download and build WRK2:
 
 git clone https://github.com/giltene/wrk2.git
+
 cd wrk2
+
 make
 
 Once WRK2 is built, we can run the following command to test our network and see the data:
