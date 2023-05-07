@@ -38,9 +38,42 @@ There are two main files created using Python, namely network and load balancer.
 Implementation Details:
 
 The network consists of five servers, one load balancer, and one client. 
-As discussed above, the load balancer is responsible for allocating the varying workload (HTTP Requests) to the available servers in the network using the four load balancing algorithms we’ve taken into account for the project, namely Round Robin, Weighted Round Robin, Least Response Time load balancing, and Chained Fallover load balancing algorithm. 
-The load balancing algorithms have been evaluated at Layer 7 of the network which is the application layer, responsible for handling HTTP requests and responses. 
-WRK2 benchmarking tool has been used to measure the performance of these load balancing algorithms on parameters such as Throughput, Latency, and Response Time. We have used Github to host our source code along with the documentation for the project.
+
+The repository contains two Python files namely server.py and loadbalancer.py.
+
+In order to form the network, we open the terminal and run the following command:
+
+python3 loadbalancer.py
+
+Upon this, the loadbalancer window will prompt the user to select the load balancing algorithm out of the 4 we've considered, to be used by the load balancer.
+
+Then we open 5 different terminal windows for running the server code in order to form the network.
+We allocate different port numbers to each of these servers in order to commmunicate with them.
+For the purpose of testing, we have assigned port numbers 8000, 8001, 8002, 8003 and 8004 to the 5 respective servers.
+Command (To be run on each terminal window):
+
+python3 server.py
+
+WRK2 benchmarking tool has been used to measure the performance of these load balancing algorithms on parameters such as Throughput, Latency, and Number of socket errors. We have used Github to host our source code along with the documentation for the project.
+
+To test the network:
+
+We run the following commands to download and build WRK2:
+
+git clone https://github.com/giltene/wrk2.git
+cd wrk2
+make
+
+Once WRK2 is built, we can run the following command to test our network and see the data:
+
+./wrk -t2 -c50 -d20s -R5000 --latency http://localhost:8080
+
+The port number 8080 mentioned in the command above is the port, the load balancer is running on.
+
+t is the number of threads
+c is the number of concurrent connections
+d is the duration of the test
+R is the number of requests per second
 
 Github Repository:
 
