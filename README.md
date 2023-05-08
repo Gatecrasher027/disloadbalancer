@@ -12,11 +12,11 @@ HTTP requests are sent to the load balancer by the client which then allocates t
 
 Load Balancing Algorithms:
 
-In the project, we have compared the working of 4 load balancing algorithms namely Round Robin, Weighted Round Robin, Least Response Time load balancing, and Chained Fallover load balancing algorithm. 
+In the project, we have compared the working of 4 load balancing algorithms namely Round Robin, Weighted Round Robin, Least Response Time load balancing, and Chained Failover load balancing algorithm. 
 
 Evaluation Metrics:
 
-We have tried to measure the performance of these algorithms based on metrics such as Throughput, Latency, Scalability etc. to provide actual performance data.
+We have tried to measure the performance of these algorithms based on metrics such as Throughput, Latency, Scalability, Number of Socket Errors etc. to provide actual performance data.
 
 Tools used for Evaluation and associated network layer:
 
@@ -28,12 +28,12 @@ This detailed analysis will help network and system administrators and architect
 
 Solution Implementation:
 
-Technical details and Tech Stack used
+Technical details and Tech Stack used:
 
 Programming Language used:
 
 For the purpose of creating the network and the load balancer, we have used Python as the programming language. 
-There are two main files created using Python, namely network and load balancer.
+There are two main files created using Python, namely server.py and loadbalancer.py.
 
 Implementation Details:
 
@@ -68,7 +68,7 @@ make
 
 Once WRK2 is built, we can run the following command to test our network and see the data:
 
-./wrk -t2 -c50 -d20s -R5000 --latency http://localhost:8080
+./wrk -t2 -c20 -d30s -R500 --latency http://localhost:8080
 
 The port number 8080 mentioned in the command above is the port, the load balancer is running on.
 
@@ -76,6 +76,30 @@ t is the number of threads
 c is the number of concurrent connections
 d is the duration of the test
 R is the number of requests per second
+
+These parameters were varied in accordance with the specific nature of the tests.
+
+The following tests mentioned in the graphs were conducted using WRK2 and the data obtained was noted.
+
+The results of the tests have been plotted on graphs using Matplotlib and the ipynb graphs file has been added to the repository.
+
+To test scalability, we increased the number of servers in the network from 5 to 10 by increasing the server instances using the server creation process mentioned above. The new servers were assigned port numbers 8005, 8006, 8007, 8008, and 8009 respectively in the server.py file. There are currently 5 servers in the server.py file. If anyone wishes to reproduce the results of scalability, the number of servers can be varied using the process mentioned in this step.
+
+The graphs are:
+
+Latency vs Number of connections
+
+Throughput vs Number of connections
+
+Number of socket errors vs number of connections
+
+Latency vs Number of requests per second
+
+Throughput vs Number of requests per second
+
+Latency vs Number of requests per second for 10 servers
+
+Throughput vs Number of requests per second for 10 servers
 
 Github Repository:
 
